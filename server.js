@@ -34,6 +34,7 @@ app.get('/api/notes', (req, res) => res.json(notesDB));
 // and adds it to the db.json file.
 // Each note should has a unique ID
 // TODO: Need to return the new note to the client. 
+// Possibly an issue with the handleNoteSave function in index.js
 app.post("/api/notes", (req, res) => {
     console.log(`${req.method} request received to add new note`);
     // Destructuring for items 
