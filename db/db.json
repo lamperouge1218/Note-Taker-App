@@ -1,17 +1,1 @@
-[
-    {
-        "title": "Test Title",
-        "text": "Test text",
-        "id": 1
-    },
-    {
-        "title": "Test Title 2",
-        "text": "Test text 2",
-        "id": 69
-    },
-    {
-        "title": "Get groceries",
-        "text": "Shrimp \nCheese\nCrackers",
-        "id": "d6a25d90-26d4-11ec-8286-607b7235e849"
-    }
-]
+[{"title":"Test Title","text":"Test text","id":1},{"title":"Test Title 2","text":"Test text 2","id":69},{"title":"Get groceries","text":"Shrimp \nCheese\nCrackers","id":"d6a25d90-26d4-11ec-8286-607b7235e849"},{"title":"Get the dog","text":"from the store","id":"ac4f9930-26d5-11ec-89f6-a1f9250f0924"}]

@@ -30,9 +30,10 @@ app.get("/notes", (req, res) => {
 // GET /api/notes reads the db.json file and returns all saved notes as JSON
 app.get('/api/notes', (req, res) => res.json(notesDB));
 
-// TODO: POST /api/notes should receive a new note to save on the request body, 
-// add it to the db.json file, and then return the new note to the client. 
-// Each note should have a unique ID.
+// POST /api/notes receives a new note to save on the request body, 
+// and adds it to the db.json file.
+// Each note should has a unique ID
+// TODO: Need to return the new note to the client. 
 app.post("/api/notes", (req, res) => {
     console.log(`${req.method} request received to add new note`);
     // Destructuring for items 
