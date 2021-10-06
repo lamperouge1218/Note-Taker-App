@@ -11,7 +11,8 @@ app.use(express.static('public'));
 
 // GET Requests as follows:
 
-// Index.html on main page load
+// Index.html on main page load. No idea how GET * Works yet.
+// TODO: Make sure that GET * fucntions as needed in assignment README (10/6/2021)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
@@ -25,8 +26,8 @@ app.get("/notes", (req, res) => {
 app.get('/api/notes', (req, res) => res.json(notesDB));
 
 // TODO: POST /api/notes should receive a new note to save on the request body, 
-//add it to the db.json file, and then return the new note to the client. 
-//Each note should have a unique ID.
+// add it to the db.json file, and then return the new note to the client. 
+// Each note should have a unique ID.
 
 app.listen(PORT, () =>
   console.log(`Express server listening on port ${PORT}!`)
