@@ -33,7 +33,7 @@ app.get('/api/notes', (req, res) => res.json(notesDB));
 app.post("/api/notes", (req, res) => {
     console.log(`${req.method} request received to add new note`);
     // Destructuring for items 
-    const { title, text, id } = req.body;
+    const { title, text } = req.body;
 
     if (title && text) {
         const newNote = {
@@ -44,7 +44,7 @@ app.post("/api/notes", (req, res) => {
 
         const noteString = JSON.stringify(newNote);
 
-        fs.appendFile("./db/db.json", noteString, (err) =>
+        fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
             err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
         );
 
