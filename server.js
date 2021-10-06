@@ -1,12 +1,15 @@
+// Requires
 const express = require('express');
 const notesDB = require("./db/db.json");
 const path = require('path');
 const fs = require("fs");
 const uuidv1 = require('uuidv1');
 
-const PORT = 3001;
+// Consts used during the process
+const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
