@@ -42,14 +42,20 @@ app.post("/api/notes", (req, res) => {
         const newNote = {
             title,
             text,
-            review_id: uuidv1(),
+            id: uuidv1(),
         };
 
-        const noteString = JSON.stringify(newNote);
-
-        fs.writeFile(`./db/${newNote.title}.json`, noteString, (err) =>
-            err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
-        );
+        // readFile function to read through the data in the db.json
+        fs.readFile("./db/db.json", function (err, data) {
+            // Const constaining the parsed data
+            const json = JSON.parse(data);
+            // Pushes newNote object onto the array in the parsed data
+            json.push(newNote);
+            // Overwrites the db.json file with all of the new data that has been posted.
+            fs.writeFile(`./db/db.json`, JSON.stringify(json), (err) =>
+                err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
+            );
+        })
 
         const response = {
             status: "success",
@@ -66,3 +72,4 @@ app.post("/api/notes", (req, res) => {
 app.listen(PORT, () =>
     console.log(`Express server listening on port ${PORT}!`)
 );
+
