@@ -17,7 +17,7 @@ app.use(express.static('public'));
 // GET Requests as follows:
 
 // Index.html on main page load. No idea how GET * Works yet.
-// TODO: (10/6/2021) Make sure that GET * fucntions as needed in assignment README 
+// TODO: (10/6/2021) Make sure that GET * functions as needed in assignment README 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -28,13 +28,19 @@ app.get("/notes", (req, res) => {
 });
 
 // GET /api/notes reads the db.json file and returns all saved notes as JSON
-app.get('/api/notes', (req, res) => res.json(notesDB));
+// TODO: Every time save button is pressed, we want to read from the file again
+// fs.readFile, return res.json(data)
+app.get('/api/notes', (req, res) => {
+    fs.readFile("./db/db.json", function (err, data) {
+        res.send(data);
+    })
+});
 
 // POST /api/notes receives a new note to save on the request body, 
 // and adds it to the db.json file.
 // Each note should has a unique ID
 // TODO: Need to return the new note to the client. 
-// Possibly an issue with the handleNoteSave function in index.js
+// Possibly an issue with the handleNoteSave function in index.js (though apparently not)
 app.post("/api/notes", (req, res) => {
     console.log(`${req.method} request received to add new note`);
     // Destructuring for items 
@@ -65,7 +71,7 @@ app.post("/api/notes", (req, res) => {
         };
 
         console.log(response);
-        res.status(201).json(response);
+        res.status(201).json(newNote);
     } else {
         res.status(500).json('Error in posting note');
     }
