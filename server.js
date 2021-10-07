@@ -52,7 +52,7 @@ app.post("/api/notes", (req, res) => {
             // Pushes newNote object onto the array in the parsed data
             parsedNotes.push(newNote);
             // Overwrites the db.json file with all of the new data that has been posted.
-            fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) => 
+            fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) =>
                 err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
             );
         });
