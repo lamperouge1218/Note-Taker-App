@@ -71,23 +71,23 @@ app.post("/api/notes", (req, res) => {
 
 
 // Function to delete a note in the app by id
-app.delete("/api/notes/:id", (req, res) => {
-    for (let i = 0; i < notesDB.length; i++) {
-        if (notesDB[i].id === req.params.id) {
-            notesDB.splice(i, 1);
-            break;
-        }
-    }
+// app.delete("/api/notes/:id", (req, res) => {
+//     for (let i = 0; i < notesDB.length; i++) {
+//         if (notesDB[i].id === req.params.id) {
+//             notesDB.splice(i, 1);
+//             break;
+//         }
+//     }
 
-    fs.writeFile(`./db/db.json`, JSON.stringify(notesDB), (err) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log("Your note was deleted");
-        }
-    });
-    res.json(notesDB);
-});
+//     fs.writeFile(`./db/db.json`, JSON.stringify(notesDB), (err) => {
+//         if (err) {
+//             return console.log(err);
+//         } else {
+//             console.log("Your note was deleted");
+//         }
+//     });
+//     res.json(notesDB);
+// });
 
 // Index.html on main page load. No idea how GET * Works yet.
 // * routes go AT THE BOTTOM, PAST ALL OTHER ROUTES
