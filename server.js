@@ -52,7 +52,7 @@ app.post("/api/notes", (req, res) => {
             // Pushes newNote object onto the array in the parsed data
             parsedNotes.push(newNote);
             // Overwrites the db.json file with all of the new data that has been posted.
-            fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) => // Try the stringify a const thing above this - const stringParse = JSON.stringify(parsedNotes)
+            fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) => 
                 err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
             );
         });
@@ -67,6 +67,26 @@ app.post("/api/notes", (req, res) => {
     } else {
         res.status(500).json('Error in posting note');
     }
+});
+
+
+// Function to delete a note in the app by id
+app.delete("/api/notes/:id", (req, res) => {
+    for (let i = 0; i < notesDB.length; i++) {
+        if (notesDB[i].id === req.params.id) {
+            notesDB.splice(i, 1);
+            break;
+        }
+    }
+
+    fs.writeFile(`./db/db.json`, JSON.stringify(notesDB), (err) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            console.log("Your note was deleted");
+        }
+    });
+    res.json(notesDB);
 });
 
 // Index.html on main page load. No idea how GET * Works yet.

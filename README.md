@@ -6,7 +6,7 @@
 
 This application serves as a location to take notes and store them for review and use. It uses Express.js as a back-end framework to handle GET and POST requests using specified HTML routes. 
 
-Here is a link to the video of this project in action: [Test of Application]()
+This application is live at the following Heroku CLI Link: [Note Taker App Live](https://protected-eyrie-71903.herokuapp.com/)
 
 ## Table of Contents
 
