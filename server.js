@@ -16,19 +16,12 @@ app.use(express.static('public'));
 
 // GET Requests as follows:
 
-// Index.html on main page load. No idea how GET * Works yet.
-// TODO: (10/6/2021) Make sure that GET * functions as needed in assignment README 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 // Notes.html upon button click and navigation to specific address
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
 // GET /api/notes reads the db.json file and returns all saved notes as JSON
-// TODO: Every time save button is pressed, we want to read from the file again
 // fs.readFile, return res.json(data)
 app.get('/api/notes', (req, res) => {
     fs.readFile("./db/db.json", function (err, data) {
@@ -38,8 +31,7 @@ app.get('/api/notes', (req, res) => {
 
 // POST /api/notes receives a new note to save on the request body, 
 // and adds it to the db.json file.
-// Each note should has a unique ID
-// TODO: Need to return the new note to the client. 
+// Each note has a unique ID 
 // Possibly an issue with the handleNoteSave function in index.js (though apparently not)
 app.post("/api/notes", (req, res) => {
     console.log(`${req.method} request received to add new note`);
@@ -75,7 +67,13 @@ app.post("/api/notes", (req, res) => {
     } else {
         res.status(500).json('Error in posting note');
     }
-})
+});
+
+// Index.html on main page load. No idea how GET * Works yet.
+// * routes go AT THE BOTTOM, PAST ALL OTHER ROUTES
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
 
 app.listen(PORT, () =>
     console.log(`Express server listening on port ${PORT}!`)
