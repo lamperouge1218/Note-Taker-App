@@ -63,7 +63,7 @@ app.post("/api/notes", (req, res) => {
             fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) => // Try the stringify a const thing above this - const stringParse = JSON.stringify(parsedNotes)
                 err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
             );
-        })
+        });
 
         const response = {
             status: "success",
