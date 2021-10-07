@@ -54,13 +54,13 @@ app.post("/api/notes", (req, res) => {
         };
 
         // readFile function to read through the data in the db.json
-        fs.readFile("./db/db.json", function (err, data) {
+        fs.readFile("./db/db.json", "utf-8", function (err, data) {
             // Const constaining the parsed data
-            const json = JSON.parse(data);
+            const parsedNotes = JSON.parse(data);
             // Pushes newNote object onto the array in the parsed data
-            json.push(newNote);
+            parsedNotes.push(newNote);
             // Overwrites the db.json file with all of the new data that has been posted.
-            fs.writeFile(`./db/db.json`, JSON.stringify(json), (err) =>
+            fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) => // Try the stringify a const thing above this - const stringParse = JSON.stringify(parsedNotes)
                 err ? console.error(err) : console.log(`Note ${newNote.title} has been written to JSON file`)
             );
         })
@@ -71,7 +71,7 @@ app.post("/api/notes", (req, res) => {
         };
 
         console.log(response);
-        res.status(201).json(newNote);
+        res.status(201).json(newNote); // possibly change this back to response
     } else {
         res.status(500).json('Error in posting note');
     }
