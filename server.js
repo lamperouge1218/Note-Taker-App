@@ -89,7 +89,7 @@ app.delete("/api/notes/:id", (req, res) => {
 
         // Overwrites the db.json file with all of the new data that has been posted.
         fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) =>
-            err ? console.error(err) : console.log(`Note ${newNote.title} has been deleted.`)
+            err ? console.error(err) : console.log(`Note has been deleted.`)
         );
        return res.json(parsedNotes);
 
