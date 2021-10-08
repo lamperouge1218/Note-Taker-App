@@ -74,20 +74,18 @@ app.post("/api/notes", (req, res) => {
 
 // Function to delete a note in the app by id
 app.delete("/api/notes/:id", (req, res) => {
-
     fs.readFile("./db/db.json", "utf-8", function (err, data) {
         // Const constaining the parsed data
         const parsedNotes = JSON.parse(data);
-        // Pushes newNote object onto the array in the parsed data
+        // Loops over parsedNotes from the db.json and checks for notes that have an id a specific ID
+        // If it does, it is spliced from the parsedNotes array
         for (let i = 0; i < parsedNotes.length; i++) {
             if (parsedNotes[i].id === req.params.id) {
                 parsedNotes.splice(i, 1);
                 break;
             }
         }
-
-
-        // Overwrites the db.json file with all of the new data that has been posted.
+        // Overwrites the db.json file with the new array that has the note deleted
         fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) =>
             err ? console.error(err) : console.log(`Note has been deleted.`)
         );
