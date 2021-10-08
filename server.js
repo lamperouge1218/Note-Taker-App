@@ -16,6 +16,8 @@ app.use(express.static('public'));
 
 // GET Requests as follows:
 
+const notesArray = []
+
 // Notes.html upon button click and navigation to specific address
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'));
@@ -72,22 +74,28 @@ app.post("/api/notes", (req, res) => {
 
 // Function to delete a note in the app by id
 app.delete("/api/notes/:id", (req, res) => {
-    for (let i = 0; i < notesDB.length; i++) {
-        if (notesDB[i].id === req.params.id) {
-            notesDB.splice(i, 1);
-            break;
-        }
-    }
 
-    fs.writeFile(`./db/db.json`, JSON.stringify(notesDB), (err) => {
-        if (err) {
-            return console.log(err);
-        } else {
-            console.log("Your note was deleted");
+    fs.readFile("./db/db.json", "utf-8", function (err, data) {
+        // Const constaining the parsed data
+        const parsedNotes = JSON.parse(data);
+        // Pushes newNote object onto the array in the parsed data
+        for (let i = 0; i < parsedNotes.length; i++) {
+            if (parsedNotes[i].id === req.params.id) {
+                parsedNotes.splice(i, 1);
+                break;
+            }
         }
+
+
+        // Overwrites the db.json file with all of the new data that has been posted.
+        fs.writeFile(`./db/db.json`, JSON.stringify(parsedNotes), (err) =>
+            err ? console.error(err) : console.log(`Note ${newNote.title} has been deleted.`)
+        );
+       return res.json(parsedNotes);
+
     });
-    res.json(notesDB);
 });
+    
 
 // Index.html on main page load. No idea how GET * Works yet.
 // * routes go AT THE BOTTOM, PAST ALL OTHER ROUTES
